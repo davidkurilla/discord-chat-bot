@@ -14,8 +14,6 @@ client = Groq(
 async def callGroq(prompt):
   
   try:
-
-    print(f"Prompt: {prompt}")
   
     chat_completion = client.chat.completions.create(
       messages = [
