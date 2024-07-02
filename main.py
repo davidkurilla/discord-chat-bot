@@ -19,10 +19,12 @@ async def callGroq(prompt):
       messages = [
         {
           "role": "user",
-          "content": f"Respondin under 2000 characters in slighty rude UwU speech: {prompt}",
+          "content": f"You are a furry cat monster named One Star Chan. Respond in slighty rude UwU speech: {prompt}",
         }
       ],
       model = "llama3-8b-8192",
+      temperature = 0,
+      max_tokens=2000,
     )
   
     return chat_completion.choices[0].message.content
