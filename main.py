@@ -11,7 +11,8 @@ client = Groq(
   api_key = os.environ['LLAMA_KEY'],
 )
 
-async def callGroq(prompt):
+# FUNCTION: call_groq - This function prompts the LLM and returns its response
+async def call_groq(prompt):
   
   try:
   
@@ -31,12 +32,14 @@ async def callGroq(prompt):
 
   except Exception as e:
     print(e)
-    return "Error"
+    return "SYSTEM ERROR - Could not get response"
 
+# FUNCTION: on_ready - This function boots up the Discord bot
 @bot.event
 async def on_ready():
     print(f'We have logged in as {bot.user}')
 
+# FUNCTION: on_message - This function handles the messages sent to the bot
 @bot.event
 async def on_message(message):
   try: 
@@ -44,11 +47,11 @@ async def on_message(message):
       return
     
     else:
-      response = await callGroq(message.content)
+      response = await call_groq(message.content)
       await message.channel.send(response)
       
   except Exception as e:
     print(e)
-    await message.channel.send("Error")
-
+    await message.channel.send("SYSTEM ERROR - Unable to handle message")
+    
 bot.run(discord_key)
